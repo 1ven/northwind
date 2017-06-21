@@ -8,6 +8,14 @@ const config = {
     library: 'LibraryName',
     libraryTarget: 'umd'
   },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
+      }
+    ]
+  },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
