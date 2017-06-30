@@ -28,7 +28,7 @@
     "test": "jest",
     "clean": "rimraf ./lib ./dist",
     "precommit": "lint-staged",
-    "preversion": "npm run test && npm run build",
+    "preversion": "npm run test && npm run clean && npm run build",
     "postversion": "git push && git push --tags && npm publish",
     "postpublish": "npm run clean"
   },
