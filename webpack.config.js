@@ -31,7 +31,7 @@ const config = {
     })
   ],
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
     modules: [path.resolve(process.cwd(), "./src"), "node_modules"]
   },
 };
