@@ -55,3 +55,33 @@ test("conforms Monoid left identity", () => {
   const a = new Just("a");
   expect(Just.empty().concat(a)).toEqual(a);
 });
+
+test("conforms Functor identity", () => {
+  const a = new Just("a");
+  expect(a.map(x => x)).toEqual(a);
+});
+
+test("conforms Functor composition", () => {
+  const a = new Just("a"),
+    f = x => x + "b",
+    g = x => x + "c";
+  expect(a.map(x => f(g(x)))).toEqual(a.map(g).map(f));
+});
+
+test("conforms Apply composition", () => {
+  const a = new Just("a"),
+    b = new Just(x => x + "b"),
+    c = new Just(x => x + "c");
+  expect(a.ap(b.ap(c.map(f => g => x => f(g(x)))))).toEqual(a.ap(b).ap(c));
+});
+
+test("conforms Applicative identity", () => {
+  const a = new Just("a");
+  expect(a.ap(Just.of(x => x))).toEqual(a);
+});
+
+test("conforms Applicative identity", () => {
+  const a = "a",
+    f = x => x + "b";
+  expect(Just.of(a).ap(Just.of(f))).toEqual(Just.of(f(a)));
+});

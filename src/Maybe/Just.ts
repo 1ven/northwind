@@ -4,7 +4,9 @@ import { Maybe, MaybeConstructor } from "./";
 import { of, zero, empty } from "./static";
 import Nothing, { isNothing } from "./Nothing";
 
-interface Constructor extends MaybeConstructor { new <T>(__value?: T) }
+interface Constructor extends MaybeConstructor {
+  new <T>(__value?: T): Maybe<T>;
+}
 
 const Just = <Constructor>class Just<T> implements Maybe<T> {
   constructor(public __value?: T) {}
