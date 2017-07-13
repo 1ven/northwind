@@ -1,7 +1,7 @@
 import * as Z from "sanctuary-type-classes";
 import * as F from "fantasy-types";
-import { Nothing, isNothing } from "./Nothing";
-import { Just, isJust } from "./Just";
+import Nothing, { isNothing } from "./Nothing";
+import Just, { isJust } from "./Just";
 
 export interface Maybe<T> extends F.Ord, F.Monoid, F.Monad<T>, F.Alternative<
   T
@@ -16,10 +16,10 @@ export const fromMaybe = <T>(initial: T, m: Maybe<T>): T =>
 
 // TODO: check on null as well
 export const toMaybe = <T>(v?: T): Maybe<T> =>
-  typeof v === "undefined" ? Nothing() : Just<T>(v);
+  typeof v === "undefined" ? new Nothing() : new Just<T>(v);
 
 export const maybe = <T, T1>(initial: T, f: (a: T) => T1, m: Maybe<T>): T1 =>
   f(fromMaybe<T>(initial, m));
 
-export { Just, isJust } from "./Just";
-export { Nothing, isNothing } from "./Nothing";
+export { default as Just, isJust } from "./Just";
+export { default as Nothing, isNothing } from "./Nothing";

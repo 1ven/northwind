@@ -1,8 +1,8 @@
-import { Nothing } from "./Nothing";
-import { Just } from "./Just";
+import Nothing from "./Nothing";
+import Just from "./Just";
 
-export const empty = () => Nothing();
+export const empty = () => new Nothing();
 
-export const zero = () => Nothing();
+export const zero = () => new Nothing();
 
-export const of = <T>(value: T) => Just<T>(value);
+export const of = <T>(value: T) => new Just<T>(value);

@@ -1,12 +1,12 @@
-import { Nothing } from "../Nothing";
+import Nothing from "../Nothing";
 
 test("conforms Setoid reflexivity", () => {
-  const a = Nothing();
+  const a = new Nothing();
   expect(a.equals(a)).toBeTruthy();
 });
 
 test("conforms Setoid symmetry", () => {
-  const a = Nothing(),
-    b = Nothing();
+  const a = new Nothing(),
+    b = new Nothing();
   expect(a.equals(b) === b.equals(a)).toBeTruthy();
 });

@@ -2,12 +2,11 @@ import * as Z from "sanctuary-type-classes";
 import * as F from "fantasy-types";
 import { Maybe, MaybeConstructor } from "./";
 import { of, zero, empty } from "./static";
-import { Nothing, isNothing } from "./Nothing";
+import Nothing, { isNothing } from "./Nothing";
 
 interface Constructor extends MaybeConstructor { new <T>(__value?: T) }
-interface JustType extends MaybeConstructor { <T>(value: T): Maybe<T> }
 
-const JustClass = <Constructor>class JustClass<T> implements Maybe<T> {
+const Just = <Constructor>class Just<T> implements Maybe<T> {
   constructor(public __value?: T) {}
 
   static of = of;
@@ -23,16 +22,16 @@ const JustClass = <Constructor>class JustClass<T> implements Maybe<T> {
   }
 
   public concat(b: Maybe<T>) {
-    return isNothing(b) ? this : Just<T>(Z.concat(this.__value, b.__value));
+    return isNothing(b) ? this : new Just<T>(Z.concat(this.__value, b.__value));
   }
 
   public map<T1>(f: (a: T) => T1) {
-    return Just<T1>(f(this.__value));
+    return new Just<T1>(f(this.__value));
   }
 
   public ap<T1>(b: Maybe<(x: T) => T1>) {
     // TODO: should use Z.map, like sanctuary does?
-    return isNothing(b) ? Nothing() : Just<T1>(b.__value(this.__value));
+    return isNothing(b) ? new Nothing() : new Just<T1>(b.__value(this.__value));
   }
 
   public chain<T1>(f: (a: T) => Maybe<T1>) {
@@ -54,16 +53,10 @@ const JustClass = <Constructor>class JustClass<T> implements Maybe<T> {
 
   public extend(f: (a: T) => T) {
     // Differs from Sanctuary, where `f` accepts Maybe instead of its value
-    return Just(f(this.__value));
+    return new Just(f(this.__value));
   }
 };
 
-export const isJust = <T>(a: Maybe<T>): boolean => a instanceof JustClass;
+export const isJust = <T>(a: Maybe<T>): boolean => a instanceof Just;
 
-export const Just = <JustType>function Just<T>(value: T): Maybe<T> {
-  return new JustClass<T>(value);
-};
-
-Just.of = JustClass.of;
-Just.zero = JustClass.zero;
-Just.empty = JustClass.empty;
+export default Just;
