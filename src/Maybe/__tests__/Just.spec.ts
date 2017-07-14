@@ -48,49 +48,54 @@ test("conforms Semigroup associativity", () => {
 });
 
 test("conforms Monoid right identity", () => {
-  const a = new Just("a");
-  expect(a.concat(Just.empty())).toEqual(a);
+  const m = new Just("m"),
+    M = Just;
+  expect(m.concat(M.empty())).toEqual(m);
 });
 
 test("conforms Monoid left identity", () => {
-  const a = new Just("a");
-  expect(Just.empty().concat(a)).toEqual(a);
+  const m = new Just("m"),
+    M = Just;
+  expect(M.empty().concat(m)).toEqual(m);
 });
 
 test("conforms Functor identity", () => {
-  const a = new Just("a");
-  expect(a.map(x => x)).toEqual(a);
+  const u = new Just("u");
+  expect(u.map(a => a)).toEqual(u);
 });
 
 test("conforms Functor composition", () => {
-  const a = new Just("a"),
-    f = x => x + "b",
-    g = x => x + "c";
-  expect(a.map(x => f(g(x)))).toEqual(a.map(g).map(f));
+  const u = new Just("u"),
+    f = x => x + "f",
+    g = x => x + "g";
+  expect(u.map(x => f(g(x)))).toEqual(u.map(g).map(f));
 });
 
 test("conforms Apply composition", () => {
-  const a = new Just("a"),
-    b = new Just(x => x + "b"),
-    c = new Just(x => x + "c");
-  expect(a.ap(b.ap(c.map(f => g => x => f(g(x)))))).toEqual(a.ap(b).ap(c));
+  const v = new Just("v"),
+    u = new Just(x => x + "u"),
+    a = new Just(x => x + "a");
+  expect(v.ap(u.ap(a.map(f => g => x => f(g(x)))))).toEqual(v.ap(u).ap(a));
 });
 
 test("conforms Applicative identity", () => {
-  const a = new Just("a");
-  expect(a.ap(Just.of(x => x))).toEqual(a);
+  const v = new Just("v"),
+    A = Just;
+  expect(v.ap(A.of(x => x))).toEqual(v);
 });
 
 test("conforms Applicative homomorphism", () => {
-  const a = "a",
-    f = x => x + "b";
-  expect(Just.of(a).ap(Just.of(f))).toEqual(Just.of(f(a)));
+  const x = "x",
+    f = x => x + "f",
+    A = Just;
+  expect(A.of(x).ap(A.of(f))).toEqual(A.of(f(x)));
 });
 
 test("conforms Applicative interchange", () => {
-  const a = "a",
-    b = new Just(x => x + "b");
-  expect(Just.of(a).ap(b)).toEqual(b.ap(Just.of(f => f(a))));
+  const y = "y",
+    u = new Just(x => x + "u"),
+    A = Just;
+  expect(A.of(y).ap(u)).toEqual(u.ap(A.of(f => f(y))));
 });
 
 test("conforms Alt associativity", () => {
@@ -103,54 +108,61 @@ test("conforms Alt associativity", () => {
 test("conforms Alt distributivity", () => {
   const a = new Just("a"),
     b = new Just("b"),
-    f = x => x + "c";
+    f = x => x + "f";
   expect(a.alt(b).map(f)).toEqual(a.map(f).alt(b.map(f)));
 });
 
 test("conforms Plus right identity", () => {
-  const a = new Just("a");
-  expect(a.alt(Just.zero())).toEqual(a);
+  const x = new Just("x"),
+    A = Just;
+  expect(x.alt(A.zero())).toEqual(x);
 });
 
 test("conforms Plus left identity", () => {
-  const a = new Just("a");
-  expect(Just.zero().alt(a)).toEqual(a);
+  const x = new Just("x"),
+    A = Just;
+  expect(A.zero().alt(x)).toEqual(x);
 });
 
 test("conforms Plus left annihilation", () => {
-  const f = x => x + "a";
-  expect(Just.zero().map(f)).toEqual(Just.zero());
+  const f = x => x + "f",
+    A = Just;
+  expect(A.zero().map(f)).toEqual(A.zero());
 });
 
 test("conforms Alternative distributivity", () => {
-  const a = new Just("a"),
-    b = new Just(x => x + "b"),
-    c = new Just(x => x + "c");
-  expect(a.ap(b.alt(c))).toEqual(a.ap(b).alt(a.ap(c)));
+  const x = new Just("x"),
+    f = new Just(x => x + "f"),
+    g = new Just(x => x + "g");
+  expect(x.ap(f.alt(g))).toEqual(x.ap(f).alt(x.ap(g)));
 });
 
 test("conforms Alternative annihilation", () => {
-  const a = new Just("a");
-  expect(a.ap(Just.zero())).toEqual(Just.zero());
+  const x = new Just("x"),
+    A = Just;
+  expect(x.ap(A.zero())).toEqual(A.zero());
 });
 
 test("conforms Foldable associativity", () => {
-  const a = new Just("a"),
+  const u = new Just("u"),
     f = (acc, x) => acc + x;
-  expect(a.reduce(f, "z")).toEqual(
-    a.reduce((acc, x) => acc.concat([x]), []).reduce(f, "z")
+  expect(u.reduce(f, "z")).toEqual(
+    u.reduce((acc, x) => acc.concat([x]), []).reduce(f, "z")
   );
 });
 
 test("conforms Traversable naturality", () => {
   const u = new Just(new Just(5)),
-    t = x => [x];
-  expect(t(u.traverse(Just, x => x))).toEqual(u.traverse(Array, t));
+    t = x => [x],
+    F = Just,
+    G = Array;
+  expect(t(u.traverse(F, x => x))).toEqual(u.traverse(G, t));
 });
 
 test("conforms Traversable identity", () => {
-  const u = new Just("u");
-  expect(u.traverse(Array, Array.of)).toEqual(Array.of(u));
+  const u = new Just("u"),
+    F = Array;
+  expect(u.traverse(F, F.of)).toEqual(F.of(u));
 });
 
 test("conforms Traversable composition", () => {
@@ -172,18 +184,20 @@ test("conforms Chain associativity", () => {
 
 test("conforms Monad left identity", () => {
   const a = "a",
-    f = x => new Just(x + "f");
-  expect(Just.of(a).chain(f)).toEqual(f(a));
+    f = x => new Just(x + "f"),
+    M = Just;
+  expect(M.of(a).chain(f)).toEqual(f(a));
 });
 
 test("conforms Monad right identity", () => {
-  const m = new Just("m");
-  expect(m.chain(Just.of)).toEqual(m);
+  const m = new Just("m"),
+    M = Just;
+  expect(m.chain(M.of)).toEqual(m);
 });
 
 test("conforms Extend associativity", () => {
   const w = new Just("w"),
-    g = x => x.concat(new Just("f")),
-    f = x => x.concat(new Just("g"));
+    g = x => x.concat(new Just("g")),
+    f = x => x.concat(new Just("f"));
   expect(w.extend(g).extend(f)).toEqual(w.extend(_w => f(_w.extend(g))));
 });
