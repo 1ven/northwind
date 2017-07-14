@@ -5,4 +5,4 @@ export const empty = () => new Nothing();
 
 export const zero = () => new Nothing();
 
-export const of = <T>(value: T) => new Just<T>(value);
+export const of = <T>(value: T) => new Just(value);

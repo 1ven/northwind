@@ -16,7 +16,7 @@ export const fromMaybe = <T>(initial: T, m: Maybe<T>): T =>
 
 // TODO: check on null as well
 export const toMaybe = <T>(v?: T): Maybe<T> =>
-  typeof v === "undefined" ? new Nothing() : new Just<T>(v);
+  typeof v === "undefined" ? new Nothing() : new Just(v);
 
 // The same as reduce?
 export const maybe = <T, T1>(initial: T, f: (a: T) => T1, m: Maybe<T>): T1 =>
