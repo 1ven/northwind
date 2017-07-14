@@ -21,7 +21,11 @@ test("conforms Setoid transitivity", () => {
   expect(a.equals(c)).toBeTruthy();
 });
 
-test("conforms Ord totality");
+test("conforms Ord totality", () => {
+  const a = new Just(1),
+    b = new Just(2);
+  expect(a.lte(b) || b.lte(a)).toBeTruthy();
+});
 
 test("conforms Ord antisymmetry", () => {
   const a = new Just(5),
@@ -124,7 +128,7 @@ test("conforms Plus left identity", () => {
   expect(A.zero().alt(x)).toEqual(x);
 });
 
-test("conforms Plus left annihilation", () => {
+test("conforms Plus annihilation", () => {
   const f = x => x + "f",
     A = Just;
   expect(A.zero().map(f)).toEqual(A.zero());
