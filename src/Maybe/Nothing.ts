@@ -42,11 +42,11 @@ const Nothing = <Constructor>class Nothing<T> implements Maybe<T> {
     return initial;
   }
 
-  public traverse(A: F.Applicative<T>, f: (a: T) => Maybe<T>) {
+  public traverse(A: F.ApplicativeConstructor, f: (a: T) => Maybe<T>) {
     return Z.of(A, this);
   }
 
-  public extend(f: (a: T) => T) {
+  public extend<T1>(f: (a: Maybe<T>) => T1) {
     return this as any;
   }
 };

@@ -1089,9 +1089,9 @@ extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
-fantasy-types@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/fantasy-types/-/fantasy-types-0.0.5.tgz#304f7c61ca8c0faea0bac48a9a115dfa274e046b"
+fantasy-types@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/fantasy-types/-/fantasy-types-0.0.7.tgz#9e86f65c86aa0a4817dddcb1324d85e523771e01"
 
 fast-deep-equal@^0.1.0:
   version "0.1.0"

@@ -48,14 +48,12 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
     return f(initial, this.__value);
   }
 
-  // TODO: how to use it with interfaces and statics?
-  public traverse(A: F.Applicative<T>, f: (a: T) => Maybe<T>) {
-    return Z.map(Just, f(this.__value));
+  public traverse(A: F.ApplicativeConstructor, f: (a: T) => F.Traversable<T>) {
+    return f(this.__value).map(Just.of) as any;
   }
 
-  public extend(f: (a: T) => T) {
-    // Differs from Sanctuary, where `f` accepts Maybe instead of its value
-    return new Just(f(this.__value));
+  public extend<T1>(f: (a: Maybe<T>) => T1) {
+    return new Just(f(this));
   }
 };
 
