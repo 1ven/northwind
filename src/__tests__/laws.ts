@@ -71,12 +71,12 @@ export const Applicative = {
   identity: <T>(A: F.ApplicativeConstructor, v: F.Applicative<T>) => {
     expect(v.ap(A.of(x => x))).toEqual(v);
   },
-  homomorphism: (A: F.ApplicativeConstructor, x: string, f) => {
+  homomorphism: <T>(A: F.ApplicativeConstructor, x: T, f) => {
     expect(A.of(x).ap(A.of(f))).toEqual(A.of(f(x)));
   },
-  interchange: <T>(
+  interchange: <T, T1>(
     A: F.ApplicativeConstructor,
-    y: string,
+    y: T1,
     u: F.Applicative<(a) => T>
   ) => {
     expect(A.of(y).ap(u)).toEqual(u.ap(A.of(f => f(y))));
