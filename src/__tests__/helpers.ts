@@ -1,4 +1,4 @@
-import { ApplicativeConstructor, Applicative, Apply } from "fantasy-types";
+import { ApplicativeConstructor, Applicative, Apply } from "icecrown";
 
 export const makeCompose = (
   F: ApplicativeConstructor,

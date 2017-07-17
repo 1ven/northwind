@@ -1,4 +1,4 @@
-import * as F from "fantasy-types";
+import * as F from "icecrown";
 import { Maybe, MaybeConstructor } from "./";
 
 interface Constructor extends MaybeConstructor { new () }

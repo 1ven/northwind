@@ -1,5 +1,5 @@
 import * as Z from "sanctuary-type-classes";
-import * as F from "fantasy-types";
+import * as F from "icecrown";
 import { Maybe, MaybeConstructor } from "./";
 import Nothing, { isNothing } from "./Nothing";
 

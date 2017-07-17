@@ -1,4 +1,4 @@
-import * as F from "fantasy-types";
+import * as F from "icecrown";
 import { makeCompose } from "./helpers";
 
 export const Setoid = {
