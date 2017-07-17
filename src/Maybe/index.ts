@@ -9,7 +9,7 @@ export interface Maybe<T> extends F.Ord, F.Monoid, F.Monad<T>, F.Alternative<
   __value?: T;
 }
 
-export interface MaybeConstructor extends F.ApplicativeConstructor, F.MonoidConstructor, F.PlusConstructor {}
+export interface MaybeConstructor extends F.MonadConstructor, F.MonoidConstructor, F.PlusConstructor {}
 
 export const fromMaybe = <T>(initial: T, m: Maybe<T>): T =>
   isNothing(m) ? initial : m.__value;
