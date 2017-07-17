@@ -59,6 +59,6 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
   }
 };
 
-export const isJust = <T>(a: Maybe<T>): boolean => a instanceof Just;
+export const isJust = <T>(a: Maybe<T>) => a instanceof Just;
 
 export default Just;

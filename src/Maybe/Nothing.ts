@@ -52,6 +52,6 @@ const Nothing = <Constructor>class Nothing implements Maybe<void> {
   }
 };
 
-export const isNothing = <T>(a: Maybe<T>): boolean => a instanceof Nothing;
+export const isNothing = <T>(a: Maybe<T>) => a instanceof Nothing;
 
 export default Nothing;
