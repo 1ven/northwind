@@ -1,5 +1,4 @@
 import Just from "../Just";
-import { makeCompose } from "../../__tests__/helpers";
 import * as laws from "../../__tests__/laws";
 
 test("conforms Setoid reflexivity", () => {
