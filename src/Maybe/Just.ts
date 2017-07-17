@@ -1,7 +1,6 @@
 import * as Z from "sanctuary-type-classes";
 import * as F from "fantasy-types";
 import { Maybe, MaybeConstructor } from "./";
-import { of, zero, empty } from "./static";
 import Nothing, { isNothing } from "./Nothing";
 
 interface Constructor extends MaybeConstructor {
@@ -11,19 +10,19 @@ interface Constructor extends MaybeConstructor {
 const Just = <Constructor>class Just<T> implements Maybe<T> {
   constructor(public __value?: T) {}
 
-  static of = of;
-  static zero = zero;
-  static empty = empty;
+  static zero = () => new Nothing();
+  static empty = () => new Nothing();
+  static of = <T1>(value: T1) => new Just(value);
 
-  public equals(b: Maybe<T>) {
+  public equals<T1>(b: Maybe<T1>) {
     return isJust(b) && Z.equals(this.__value, b.__value);
   }
 
-  public lte(b: Maybe<T>) {
+  public lte<T1>(b: Maybe<T1>) {
     return isJust(b) && Z.lte(this.__value, b.__value);
   }
 
-  public concat(b: Maybe<T>) {
+  public concat<T1>(b: Maybe<T1>) {
     return isNothing(b) ? this : new Just<T>(Z.concat(this.__value, b.__value));
   }
 
