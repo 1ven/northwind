@@ -48,7 +48,10 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
     return f(initial, this.__value);
   }
 
-  public traverse(A: F.ApplicativeConstructor, f: (a: T) => F.Traversable<T>) {
+  public traverse<T1>(
+    A: F.ApplicativeConstructor,
+    f: (a: T) => F.Applicative<T1>
+  ) {
     return f(this.__value).map(Just.of) as any;
   }
 
