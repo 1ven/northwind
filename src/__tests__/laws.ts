@@ -47,6 +47,9 @@ export const Monoid = {
 };
 
 export const Functor = {
+  identity: (u: F.Functor<T>) => {
+    expect(u.map(a => a)).toEqual(u);
+  },
   composition: <T>(u: F.Functor<T>, f, g) => {
     expect(u.map(x => f(g(x)))).toEqual(u.map(g).map(f));
   }
