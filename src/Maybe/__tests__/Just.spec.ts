@@ -139,6 +139,6 @@ test("conforms Extend associativity", () => {
   laws.Extend.associativity(
     new Just("w"),
     x => new Just("g"),
-    x => new Just("f")
+    x => new Just(new Just("f"))
   );
 });
