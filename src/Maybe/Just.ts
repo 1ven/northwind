@@ -27,12 +27,12 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
   }
 
   public map<T1>(f: (a: T) => T1) {
-    return new Just<T1>(f(this.__value));
+    return new Just(f(this.__value));
   }
 
   public ap<T1>(b: Maybe<(x: T) => T1>) {
     // TODO: should use Z.map, like sanctuary does?
-    return isNothing(b) ? new Nothing() : new Just<T1>(b.__value(this.__value));
+    return isNothing(b) ? new Nothing() : new Just(b.__value(this.__value));
   }
 
   public chain<T1>(f: (a: T) => Maybe<T1>) {
