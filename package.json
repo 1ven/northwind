@@ -56,7 +56,6 @@
     ]
   },
   "dependencies": {
-    "icecrown": "^0.0.13",
-    "sanctuary-type-classes": "^6.0.0"
+    "icecrown": "^0.0.13"
   }
 }
