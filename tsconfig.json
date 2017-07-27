@@ -3,10 +3,11 @@
     "noImplicitAny": false,
     "declaration": true,
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
     "sourceMap": true
   },
   "files": [
+    "./lib.es6.d.ts",
     "./src/index.ts"
   ]
 }
