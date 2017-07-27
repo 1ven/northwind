@@ -1,5 +1,5 @@
+import { laws } from "icecrown";
 import Just from "../Just";
-import * as laws from "../../__tests__/laws";
 
 test("conforms Setoid reflexivity", () => {
   laws.Setoid.reflexivity(new Just("a"));
@@ -30,11 +30,11 @@ test("conforms Semigroup associativity", () => {
 });
 
 test("conforms Monoid right identity", () => {
-  laws.Monoid["right identity"](Just, new Just("m"));
+  laws.Monoid.rightIdentity(Just, new Just("m"));
 });
 
 test("conforms Monoid left identity", () => {
-  laws.Monoid["left identity"](Just, new Just("m"));
+  laws.Monoid.leftIdentity(Just, new Just("m"));
 });
 
 test("conforms Functor identity", () => {
@@ -74,11 +74,11 @@ test("conforms Alt distributivity", () => {
 });
 
 test("conforms Plus right identity", () => {
-  laws.Plus["right identity"](Just, new Just("x"));
+  laws.Plus.rightIdentity(Just, new Just("x"));
 });
 
 test("conforms Plus left identity", () => {
-  laws.Plus["left identity"](Just, new Just("x"));
+  laws.Plus.leftIdentity(Just, new Just("x"));
 });
 
 test("conforms Plus annihilation", () => {
@@ -128,11 +128,11 @@ test("conforms Chain associativity", () => {
 });
 
 test("conforms Monad left identity", () => {
-  laws.Monad["left identity"](Just, "a", x => new Just(x + "f"));
+  laws.Monad.leftIdentity(Just, "a", x => new Just(x + "f"));
 });
 
 test("conforms Monad right identity", () => {
-  laws.Monad["right identity"](Just, new Just("m"));
+  laws.Monad.rightIdentity(Just, new Just("m"));
 });
 
 test("conforms Extend associativity", () => {

@@ -1,4 +1,3 @@
-import * as Z from "sanctuary-type-classes";
 import * as F from "icecrown";
 import Nothing, { isNothing } from "./Nothing";
 import Just, { isJust } from "./Just";

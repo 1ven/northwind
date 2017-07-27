@@ -1,5 +1,5 @@
+import { laws } from "icecrown";
 import Nothing from "../Nothing";
-import * as laws from "../../__tests__/laws";
 
 test("conforms Setoid reflexivity", () => {
   laws.Setoid.reflexivity(new Nothing());
@@ -30,11 +30,11 @@ test("conforms Semigroup associativity", () => {
 });
 
 test("conforms Monoid right identity", () => {
-  laws.Monoid["right identity"](Nothing, new Nothing());
+  laws.Monoid.rightIdentity(Nothing, new Nothing());
 });
 
 test("conforms Monoid left identity", () => {
-  laws.Monoid["left identity"](Nothing, new Nothing());
+  laws.Monoid.leftIdentity(Nothing, new Nothing());
 });
 
 test("conforms Functor identity", () => {
@@ -70,11 +70,11 @@ test("conforms Alt distributivity", () => {
 });
 
 test("conforms Plus right identity", () => {
-  laws.Plus["right identity"](Nothing, new Nothing());
+  laws.Plus.rightIdentity(Nothing, new Nothing());
 });
 
 test("conforms Plus left identity", () => {
-  laws.Plus["left identity"](Nothing, new Nothing());
+  laws.Plus.leftIdentity(Nothing, new Nothing());
 });
 
 test("conforms Plus annihilation", () => {
@@ -114,11 +114,11 @@ test("conforms Chain associativity", () => {
 });
 
 test("conforms Monad left identity", () => {
-  laws.Monad["left identity"](Nothing, "a", x => new Nothing());
+  laws.Monad.leftIdentity(Nothing, "a", x => new Nothing());
 });
 
 test("conforms Monad right identity", () => {
-  laws.Monad["right identity"](Nothing, new Nothing());
+  laws.Monad.rightIdentity(Nothing, new Nothing());
 });
 
 test("conforms Extend associativity", () => {

@@ -1,5 +1,13 @@
-import * as Z from "sanctuary-type-classes";
-import * as F from "icecrown";
+import {
+  ApplicativeConstructor,
+  Applicative,
+  Setoid,
+  Semigroup,
+  Ord,
+  equals,
+  lte,
+  concat
+} from "icecrown";
 import { Maybe, MaybeConstructor } from "./";
 import Nothing, { isNothing } from "./Nothing";
 
@@ -14,32 +22,35 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
   static empty = () => new Nothing();
   static of = <T1>(value: T1) => new Just(value);
 
-  public equals<T1>(b: Maybe<T1>) {
-    return isJust(b) && Z.equals(this.__value, b.__value);
+  public equals<T1 extends Setoid, T>(this: typeof other, other: Maybe<T1>) {
+    return isJust(other) && equals(other.__value, this.__value);
   }
 
-  public lte<T1>(b: Maybe<T1>) {
-    return isJust(b) && Z.lte(this.__value, b.__value);
+  public lte<T1 extends Ord, T>(this: typeof other, other: Maybe<T1>) {
+    return isJust(other) && lte(other.__value, this.__value);
   }
 
-  public concat<T1>(b: Maybe<T1>) {
-    return isNothing(b) ? this : new Just<T>(Z.concat(this.__value, b.__value));
+  public concat<T1 extends Semigroup, T>(this: typeof other, other: Maybe<T1>) {
+    return isNothing(other)
+      ? this
+      : new Just(concat(other.__value, this.__value));
   }
 
   public map<T1>(f: (a: T) => T1) {
     return new Just(f(this.__value));
   }
 
-  public ap<T1>(b: Maybe<(x: T) => T1>) {
-    // TODO: should use Z.map, like sanctuary does?
-    return isNothing(b) ? new Nothing() : new Just(b.__value(this.__value));
+  public ap<T1>(other: Maybe<(x: T) => T1>) {
+    return isNothing(other)
+      ? new Nothing()
+      : new Just(other.__value(this.__value));
   }
 
   public chain<T1>(f: (a: T) => Maybe<T1>) {
     return f(this.__value);
   }
 
-  public alt<T1>(b: Maybe<T1>) {
+  public alt<T1>(other: Maybe<T1>) {
     return this;
   }
 
@@ -47,10 +58,7 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
     return f(initial, this.__value);
   }
 
-  public traverse<T1>(
-    A: F.ApplicativeConstructor,
-    f: (a: T) => F.Applicative<T1>
-  ) {
+  public traverse<T1>(A: ApplicativeConstructor, f: (a: T) => Applicative<T1>) {
     return f(this.__value).map(Just.of) as any;
   }
 

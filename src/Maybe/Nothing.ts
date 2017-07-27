@@ -1,4 +1,4 @@
-import * as F from "icecrown";
+import { Applicative, ApplicativeConstructor } from "icecrown";
 import { Maybe, MaybeConstructor } from "./";
 
 interface Constructor extends MaybeConstructor { new () }
@@ -8,23 +8,23 @@ const Nothing = <Constructor>class Nothing implements Maybe<void> {
   static empty = () => new Nothing();
   static of = <T>(value: T) => new Nothing();
 
-  public equals<T1>(b: Maybe<T1>) {
-    return isNothing(b);
+  public equals<T1>(other: Maybe<T1>) {
+    return isNothing(other);
   }
 
-  public lte<T1>(b: Maybe<T1>) {
+  public lte<T1>(other: Maybe<T1>) {
     return true;
   }
 
-  public concat<T1>(b: Maybe<T1>) {
-    return b;
+  public concat<T1>(other: Maybe<T1>) {
+    return other;
   }
 
   public map<T, T1>(f: (a: T) => T1) {
     return this;
   }
 
-  public ap<T, T1>(b: Maybe<(x: T) => T1>) {
+  public ap<T, T1>(other: Maybe<(x: T) => T1>) {
     return this;
   }
 
@@ -32,8 +32,8 @@ const Nothing = <Constructor>class Nothing implements Maybe<void> {
     return this;
   }
 
-  public alt<T1>(b: Maybe<T1>) {
-    return b;
+  public alt<T1>(other: Maybe<T1>) {
+    return other;
   }
 
   public reduce<T, T1>(fn: (acc: T1, value: T) => T1, initial: T1) {
@@ -41,8 +41,8 @@ const Nothing = <Constructor>class Nothing implements Maybe<void> {
   }
 
   public traverse<T, T1>(
-    A: F.ApplicativeConstructor,
-    f: (a: T) => F.Applicative<T1>
+    A: ApplicativeConstructor,
+    f: (a: T) => Applicative<T1>
   ) {
     return A.of(new Nothing());
   }
