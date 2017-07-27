@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV;
 const config = {
   entry: './src',
   output: {
-    library: 'LibraryName',
+    library: 'Northwind',
     libraryTarget: 'umd'
   },
   module: {

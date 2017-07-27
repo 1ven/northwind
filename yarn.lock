@@ -1763,9 +1763,9 @@ husky@^0.13.4:
     is-ci "^1.0.9"
     normalize-path "^1.0.0"
 
-icecrown@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/icecrown/-/icecrown-0.0.12.tgz#2ebaf864002b19f40960bbb2770c73dc9bf160be"
+icecrown@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/icecrown/-/icecrown-0.0.13.tgz#ab7882358baaaf6d81d577a4e9a8180053b789af"
   dependencies:
     is-plain-object "^2.0.4"
 
