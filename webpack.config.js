@@ -13,12 +13,16 @@ const config = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
-        options: {
-          compilerOptions: {
-            declaration: false
+        use: [{
+          loader: 'babel-loader'
+        }, {
+          loader: 'ts-loader',
+          options: {
+            compilerOptions: {
+              declaration: false
+            }
           }
-        }
+        }]
       }
     ]
   },
