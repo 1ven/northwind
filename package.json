@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "northwind",
   "version": "0.0.2",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -11,10 +11,7 @@
     "src"
   ],
   "devDependencies": {
-    "@types/jest": "^20.0.2",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
+    "@types/jest": "^20.0.5",
     "cross-env": "^5.0.1",
     "husky": "^0.13.4",
     "jest": "^20.0.4",
@@ -23,7 +20,7 @@
     "rimraf": "^2.6.1",
     "ts-jest": "^20.0.6",
     "ts-loader": "^2.1.0",
-    "typescript": "^2.3.4",
+    "typescript": "^2.4.2",
     "webpack": "^3.0.0"
   },
   "scripts": {
@@ -56,6 +53,6 @@
     ]
   },
   "dependencies": {
-    "icecrown": "^0.0.13"
+    "icecrown": "^0.0.15"
   }
 }
