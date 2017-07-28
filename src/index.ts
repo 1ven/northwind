@@ -1,3 +1,4 @@
-import * as Maybe from "./Maybe";
+import * as M from "./Maybe";
 
-export { Maybe };
+export const Maybe = M;
+export type Maybe<T> = M.Maybe<T>;

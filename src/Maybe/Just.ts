@@ -15,7 +15,7 @@ interface Constructor extends MaybeConstructor {
   new <T>(__value?: T): Maybe<T>;
 }
 
-const Just = <Constructor>class Just<T> implements Maybe<T> {
+export default class Just<T> implements Maybe<T> {
   constructor(public __value?: T) {}
 
   static zero = () => new Nothing();
@@ -65,8 +65,6 @@ const Just = <Constructor>class Just<T> implements Maybe<T> {
   public extend<T1>(f: (a: Maybe<T>) => T1) {
     return new Just(f(this));
   }
-};
+}
 
 export const isJust = <T>(a: Maybe<T>) => a instanceof Just;
-
-export default Just;

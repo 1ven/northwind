@@ -1,9 +1,11 @@
 import { Applicative, ApplicativeConstructor } from "icecrown";
 import { Maybe, MaybeConstructor } from "./";
 
-interface Constructor extends MaybeConstructor { new () }
+export interface Constructor extends MaybeConstructor {
+  new (): Maybe<void>;
+}
 
-const Nothing = <Constructor>class Nothing implements Maybe<void> {
+export default class Nothing implements Maybe<void> {
   static zero = () => new Nothing();
   static empty = () => new Nothing();
   static of = <T>(value: T) => new Nothing();
@@ -50,8 +52,6 @@ const Nothing = <Constructor>class Nothing implements Maybe<void> {
   public extend<T1>(f: (a: Nothing) => T1) {
     return this;
   }
-};
+}
 
 export const isNothing = <T>(a: Maybe<T>) => a instanceof Nothing;
-
-export default Nothing;
